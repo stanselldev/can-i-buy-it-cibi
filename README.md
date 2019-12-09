@@ -4,4 +4,6 @@ This is a budget application that allows you to view your finances from a calend
 
 I am currently learning GraphQL + Prisma + Apollo and will be building the back end with it. I still need to finish up the UI and make some changes, but the overall concept is there.
 
+I also plan on implementing the new Context features from React instead of using Redux.  Not entirely sure I will need Redux for this just yet.  TBD.
+
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/can-i-buy-it-cibi)
