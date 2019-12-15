@@ -1,73 +1,17 @@
 import React from "react"
 import dateFns from "date-fns"
+import Airtable from 'airtable'
+import InflowsReducer from '../../Context/Reducers/inflows'
+import OutflowsReducer from '../../Context/Reducers/outflows'
 import "../../styles.css"
 
-let expenses = {
-        1: [
-          {
-            amount: 1200,
-            name: "RENT",
-            oneTime: false,
-            entryMonth: "01",
-            entryYear: "2018"
-          },
-          {
-            amount: 150,
-            name: "ELECTRICITY",
-            oneTime: true,
-            entryMonth: "06",
-            entryYear: "2018"
-          },
-          {
-            amount: 1000,
-            name: "TEST",
-            oneTime: false,
-            entryMonth: "06",
-            entryYear: "2019"
-          }
-        ],
-        2: [
-          {
-            amount: 358,
-            name: "VW LOAN",
-            oneTime: false,
-            entryMonth: "02",
-            entryYear: "2018"
-          }
-        ],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-        7: [],
-        8: [],
-        9: [],
-        10: [],
-        11: [],
-        12: [],
-        13: [],
-        14: [],
-        15: [],
-        16: [],
-        17: [],
-        18: [],
-        19: [],
-        20: [],
-        21: [],
-        22: [],
-        23: [],
-        24: [],
-        25: [],
-        26: [],
-        27: [],
-        28: [],
-        29: [],
-        30: [],
-        31: []
-      }
+var base = new Airtable({apiKey: 'keyr5APG3eQZTwsyo'}).base('appfC00V649Vh4n5j');
+
 
 
 class ExpenseContainer extends React.Component {
+  const [inflows, dispatch] = useReducer(InflowsReducer, [])
+
   constructor(props) {
     super(props)
     this.state = {
@@ -82,6 +26,11 @@ class ExpenseContainer extends React.Component {
     this.addNewExpense = this.addNewExpense.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+  }
+
+  async getAllValues() {
+      let data = await base('OUTFLOW').select().all()
+      console.log(data)
   }
 
   componentWillUnmount() {
@@ -213,9 +162,74 @@ class ExpenseContainer extends React.Component {
     return (
       <div className="ExpenseContainer">
         <div>{this.modalContent()}</div>
+        {/* <button onClick={this.getAllValues()}>Check</button> */}
       </div>
     );
   }
 }
 
 export default ExpenseContainer
+
+let expenses = {
+        1: [
+          {
+            amount: 1200,
+            name: "RENT",
+            oneTime: false,
+            entryMonth: "01",
+            entryYear: "2018"
+          },
+          {
+            amount: 150,
+            name: "ELECTRICITY",
+            oneTime: true,
+            entryMonth: "06",
+            entryYear: "2018"
+          },
+          {
+            amount: 1000,
+            name: "TEST",
+            oneTime: false,
+            entryMonth: "06",
+            entryYear: "2019"
+          }
+        ],
+        2: [
+          {
+            amount: 358,
+            name: "VW LOAN",
+            oneTime: false,
+            entryMonth: "02",
+            entryYear: "2018"
+          }
+        ],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+        11: [],
+        12: [],
+        13: [],
+        14: [],
+        15: [],
+        16: [],
+        17: [],
+        18: [],
+        19: [],
+        20: [],
+        21: [],
+        22: [],
+        23: [],
+        24: [],
+        25: [],
+        26: [],
+        27: [],
+        28: [],
+        29: [],
+        30: [],
+        31: []
+      }

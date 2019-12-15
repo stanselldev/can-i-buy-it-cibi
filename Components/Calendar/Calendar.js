@@ -103,7 +103,7 @@ class Calendar extends React.Component {
       days = []
     }
 
-    console.log(rows[0])
+    // console.log(rows[0])
 
     return <div className="body">{rows}</div>;
   }
