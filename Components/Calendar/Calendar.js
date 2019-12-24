@@ -130,6 +130,7 @@ const Calendar = () => {
           ]}
         >
           <h1>Hello from Modal!!</h1>
+          <ExpenseContainer day={selectedDate} />
         </Modal>
       </div>
     )
