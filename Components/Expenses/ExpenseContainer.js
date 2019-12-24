@@ -1,19 +1,18 @@
 import React, { useEffect, useReducer } from "react"
 import dateFns from "date-fns"
 import Airtable from 'airtable'
-import InflowsReducer from '../../Context/Reducers/inflows'
-import OutflowsReducer from '../../Context/Reducers/outflows'
+import FinancesReducer from '../../Context/Reducers/inflows'
 import "../../styles.css"
 
 var base = new Airtable({apiKey: 'keyr5APG3eQZTwsyo'}).base('appfC00V649Vh4n5j');
 
 export const TestContainer = () => {
-  // const [inflows, dispatch] = useReducer(InflowsReducer, [])
+  const [finances, dispatch] = useReducer(FinancesReducer, [])
 
   return (
     <div className="ExpenseContainer">
         {/*<div>{this.modalContent()}</div>*/}
-        <button onClick={() => console.log('test')}>Check</button>
+        <button onClick={() => console.log('test')}>CHECK FINANCES CONTEXT</button>
       </div>
   )
 }

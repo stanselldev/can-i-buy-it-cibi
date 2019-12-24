@@ -137,7 +137,7 @@ const Calendar = () => {
 
   return (
     <Fragment>
-      <button onClick={() => console.log(selectedMonth, selectedDate, showModal)}>TEST</button>
+      <button onClick={() => console.log(selectedMonth, selectedDate, showModal)}>CHECK CALENDAR CONTEXT</button>
       <div className="calendar">
         {renderHeader()}
         {renderDays()}
