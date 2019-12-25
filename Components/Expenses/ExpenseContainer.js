@@ -3,42 +3,57 @@ import { format } from "date-fns"
 import Airtable from 'airtable'
 import FinancesReducer from '../../Context/Reducers/inflows'
 import "../../styles.css"
-import { Button, Input, Checkbox, Form } from 'antd'
-
-var base = new Airtable({apiKey: 'keyr5APG3eQZTwsyo'}).base('appfC00V649Vh4n5j');
+import { Button, Input, Checkbox, Form } from "antd"
+import { getAllFinances } from "../../Functional/handleData"
 
 export const ExpenseContainer = (props) => {
-  const [finances, dispatch] = useReducer(FinancesReducer, {})
-
+  const { day, finances } = props
+  const [finances, dispatch] = useReducer(FinancesReducer, finances)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState('')
   const [recurring, setRecurring] = useState(false)
 
   const showFinances = () => {
-    const selectedDate = format(props.day, "d")
-    const selectedMonth = format(props.day, "MM")
-    const selectedYear = format(props.day, "yyyy")
-    let expenseContainer = []
-    let key = 1
+    const selectedDate = format(day, "d")
+    const selectedMonth = format(day, "MM")
+    const selectedYear = format(day, "yyyy")
+    let financeContainer = []
 
-    Object.keys(finances).forEach(function(key) {
-      if (key == selectedDate) {
-        for (let i = 0; i < finances[key].length; i++) {
-          if (
-            (finances[key][i].entryMonth === selectedMonth 
-            && finances[key][i].entryYear === selectedYear)
-            || finances[key][i].oneTime === false 
+    console.log('find',finances)
+    let financeArray = finances.filter((finance) => selectedDate == finance.fields.DAY)
+
+    for (let i = 0; i < financeArray.length; i++) {
+      if (
+            (financeArray[i].fields.MONTH === selectedMonth 
+            && financeArray[i].fields.YEAR === selectedYear)
+            || financeArray[i].fields.RECURRING === false 
           ) {
-            expenseContainer.push(
+            financeContainer.push(
               <div key={i}>
-                {finances[key][i].name}: {finances[key][i].amount}
+                {financeArray[i].fields.name}: {financeArray[i].fields.amount}
               </div>
             )
           }
-        }
-      }
-    })
-    return <div>{expenseContainer}</div>
+    }
+
+    // Object.keys(finances).forEach(function(key) {
+    //   if (key == selectedDate) {
+    //     for (let i = 0; i < finances[key].length; i++) {
+    //       if (
+    //         (finances[key][i].entryMonth === selectedMonth 
+    //         && finances[key][i].entryYear === selectedYear)
+    //         || finances[key][i].oneTime === false 
+    //       ) {
+    //         expenseContainer.push(
+    //           <div key={i}>
+    //             {finances[key][i].name}: {finances[key][i].amount}
+    //           </div>
+    //         )
+    //       }
+    //     }
+    //   }
+    // })
+    return <div>{financeContainer}</div>
   }
 
   return (
@@ -46,7 +61,7 @@ export const ExpenseContainer = (props) => {
       {showFinances()}
       <button onClick={() => console.log(`name: ${name}, amount: ${amount}, recurring: ${recurring}`)}>CHECK FINANCES CONTEXT</button>
 
-      <Form onSubmit={console.log("Submitted")}>
+      <Form onSubmit={() => console.log("Submitted")}>
         <Form.Item>
           <label>Name: </label>
           <Input onChange={(e) => setName(e.target.value)} />

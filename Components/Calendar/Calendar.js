@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from "react"
+import React, { Fragment, useState, useReducer, useEffect } from "react"
 import "../../styles.css"
 import { Modal, Button } from 'antd';
 import 'antd/es/button/style/css';
 import 'antd/es/modal/style/css';
 import ExpenseContainer from "../Expenses/ExpenseContainer"
-import { TestContainer } from '../Expenses/ExpenseContainer'
+import FinancesReducer from '../../Context/Reducers/finances'
+import { getAllFinances } from "../../Functional/handleData"
 import { 
   subMonths,
   addMonths,
@@ -23,6 +24,14 @@ import {
  } from "date-fns"
 
 const Calendar = () => {
+  const [finances, dispatch] = useReducer(FinancesReducer, [])
+
+  useEffect(() => {
+    getAllFinances().then(data => {
+      dispatch({ type: "UPDATE_FINANCES", finances: data })
+    })
+  }, [])
+
   const [selectedMonth, selectMonth] = useState(new Date())
   const [selectedDate, selectDate] = useState(new Date())
   const [showModal, toggleModal] = useState(false)
@@ -130,7 +139,7 @@ const Calendar = () => {
           ]}
         >
           <h1>Hello from Modal!!</h1>
-          <ExpenseContainer day={selectedDate} />
+          <ExpenseContainer day={selectedDate} finances={finances} />
         </Modal>
       </div>
     )
