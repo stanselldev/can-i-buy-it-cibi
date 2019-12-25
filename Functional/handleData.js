@@ -7,3 +7,22 @@ export const getAllFinances = async () => {
   let data = await base('DATA').select().all()
   return data
 }
+
+export const createNewFinance = async (finance) => {
+  console.log("ran")
+  let data = await base('DATA').create([
+    {
+      "fields": {
+        "DAY": parseInt(finance.DAY),
+        "NAME": finance.NAME.toString(),
+        "RECURRING": finance.RECURRING.toString(),
+        "AUTOPAY": "false",
+        "AMOUNT": parseInt(finance.AMOUNT),
+        "MONTH": parseInt(finance.MONTH),
+        "YEAR": parseInt(finance.YEAR)
+      }
+    }
+  ])
+  console.log(data)
+  return data
+}

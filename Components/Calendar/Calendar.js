@@ -134,11 +134,9 @@ const Calendar = () => {
           title={`${format(selectedDate, "d")}`}
           onCancel={() => toggleModal(false)}
           footer={[
-            <Button key="cancel" onClick={() => toggleModal(false)}>CANCEL</Button>,
-            <Button key="create" type="primary" onClick={() => toggleModal(false)}>CREATE</Button>
+            <Button key="cancel" onClick={() => toggleModal(false)}>CANCEL</Button>
           ]}
         >
-          <h1>Hello from Modal!!</h1>
           <ExpenseContainer day={selectedDate} finances={finances} />
         </Modal>
       </div>
