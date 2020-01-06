@@ -9,7 +9,6 @@ export const getAllFinances = async () => {
 }
 
 export const createNewFinance = async (finance) => {
-  console.log("ran")
   let data = await base('DATA').create([
     {
       "fields": {
@@ -23,6 +22,22 @@ export const createNewFinance = async (finance) => {
       }
     }
   ])
-  console.log(data)
+
   return data
 }
+
+export const deleteFinance = async (id) => {
+  let data = await base('DATA').destroy([id])
+  return data
+}
+
+export const getSettings = async () => {
+  let data = await base('SETTINGS').select().all()
+  return data
+}
+
+// export const updateSettings = async (settings) => {
+//   let data = await base('SETTINGS').update([
+//     "id": 
+//   ])
+// }

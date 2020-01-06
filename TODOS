@@ -2,11 +2,15 @@
   - need login and signup pages
   - need logout button
 
-2. Need to LIFT the expenses up from the expense container so we can use that data to determine the cell colour
-- May need to create an object or array that houses the cell data that gets rendered. This way we can have that data readily available at all times ANYWHERE
-- Right now we are simply pulling data from JSON on the expenseContainer and sending it to the Modal.  It is not accesible to the Calendar at this moment
+2. Need to hook up starting balance and display running balance on each days 
+  - Maybe simple color coding or a number in small letter
+  - This needs to be stored in a separate context called SETTINGS which will also house any other settings we build in the future
+  - We need to record the following:
+    - Date that Starting Balance was set
+    - Amount
 
-3. Need to limit expenses from being added to previous months and skewing data; they should only show going forward for NON-ONE-TIME expenses
+3a. Need to limit expenses from being added to previous months and skewing data; they should only show going forward for NON-ONE-TIME Expenses
+3b. Need to handle day issue with February with 28 days and also for leap years
 
 4. Expenses page is where users can see a list of their monthly expenses and also add to them
   - this will be the second place they can add their expenses
@@ -20,16 +24,3 @@
   - Yodlee.com appears to be able to access bank apis like YNAB, might look into this if app gets popular
 
 
-1. Rebuild with Next.js 
-  - <Link /> is the only thing we will likely need to change in current React code
-2. Build Database
-3. Build Authentication
-4. Restructure code to better handle expenses from the page launch
-  - Need to be able to access it anywhere from app since it is needed for almost all pages of application
-5. Work out bugs like previous month's having expenses entered on a month AFTER
-  - Ex. Enter expense on July 1, 2019, and that expense shows up for May 1, 2019 if its recurring, we dont want that to happen
-6. Finish design
-  - Status color on day of month (toggle-able)
-  - Show current total somewhere
-  - Consider hooking up YNAB API
-  - Dashboard page with different widgets, graphs, charts, etc. (later)

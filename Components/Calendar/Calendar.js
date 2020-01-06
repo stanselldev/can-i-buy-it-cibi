@@ -5,7 +5,8 @@ import 'antd/es/button/style/css';
 import 'antd/es/modal/style/css';
 import ExpenseContainer from "../Expenses/ExpenseContainer"
 import FinancesReducer from '../../Context/Reducers/finances'
-import { getAllFinances } from "../../Functional/handleData"
+import SettingsReducer from '../../Context/Reducers/settings'
+import { getAllFinances, getSettings } from "../../Functional/handleData"
 import { 
   subMonths,
   addMonths,
@@ -24,11 +25,15 @@ import {
  } from "date-fns"
 
 const Calendar = () => {
-  const [finances, dispatch] = useReducer(FinancesReducer, [])
+  const [finances, dispatchFinances] = useReducer(FinancesReducer, [])
+  const [settings, dispatchSettings] = useReducer(SettingsReducer, [])
 
   useEffect(() => {
     getAllFinances().then(data => {
-      dispatch({ type: "UPDATE_FINANCES", finances: data })
+      dispatchFinances({ type: "UPDATE_FINANCES", finances: data })
+    })
+    getSettings().then(data => {
+      dispatchSettings({ type: "UPDATE_SETTINGS", settings: data })
     })
   }, [])
 
@@ -95,9 +100,7 @@ const Calendar = () => {
             className={`col cell ${
               !isSameMonth(day, monthStart)
                 ? "disabled"
-                : isSameDay(day, selectedDate)
-                  ? "selected"
-                  : ""
+                : ""
             }`}
             key={day}
             onClick={() => toggleSelectedDate(cloneDay)}
@@ -145,7 +148,7 @@ const Calendar = () => {
 
   return (
     <Fragment>
-      <button onClick={() => console.log(selectedMonth, selectedDate, showModal)}>CHECK CALENDAR CONTEXT</button>
+      <button onClick={() => console.log(selectedMonth, selectedDate, showModal, finances, settings)}>CHECK CALENDAR CONTEXT</button>
       <div className="calendar">
         {renderHeader()}
         {renderDays()}
