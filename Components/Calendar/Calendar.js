@@ -28,6 +28,8 @@ const Calendar = () => {
   const [finances, dispatchFinances] = useReducer(FinancesReducer, [])
   const [settings, dispatchSettings] = useReducer(SettingsReducer, [])
 
+  const startingBalance = 10000
+
   useEffect(() => {
     getAllFinances().then(data => {
       dispatchFinances({ type: "UPDATE_FINANCES", finances: data })
@@ -40,6 +42,16 @@ const Calendar = () => {
   const [selectedMonth, selectMonth] = useState(new Date())
   const [selectedDate, selectDate] = useState(new Date())
   const [showModal, toggleModal] = useState(false)
+
+  const populateDailyBalance = (day) => {
+    let balance = startingBalance
+    for (let i = 0; i <= day; i++) {
+      console.log(finances[day])
+      // balance = balance - finances[day].fields.AMOUNT
+    }
+
+    return startingBalance
+  }
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy"
@@ -94,6 +106,9 @@ const Calendar = () => {
       for (let i = 0; i < 7; i++) {
         formattedDate = format(day, dateFormat)
         const cloneDay = day
+        console.log(day)
+
+        populateDailyBalance(day)
 
         days.push(
           <div
@@ -106,7 +121,8 @@ const Calendar = () => {
             onClick={() => toggleSelectedDate(cloneDay)}
           >
             <span className="number">{formattedDate}</span>
-            <span className="bg">{formattedDate}</span>
+            <span></span>
+            {/*<span className="bg">{formattedDate}</span>*/}
           </div>
         )
 
