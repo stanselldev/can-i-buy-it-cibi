@@ -43,15 +43,15 @@ const Calendar = () => {
   const [selectedDate, selectDate] = useState(new Date())
   const [showModal, toggleModal] = useState(false)
 
-  // const populateDailyBalance = (day) => {
-  //   let balance = startingBalance
-  //   for (let i = 0; i <= day; i++) {
-  //     console.log(finances[day])
-  //     // balance = balance - finances[day].fields.AMOUNT
-  //   }
+  const populateDailyBalance = (day) => {
+    let balance = startingBalance
+    for (let i = 0; i <= day; i++) {
+      console.log(finances[day])
+      // balance = balance - finances[day].fields.AMOUNT
+    }
 
-  //   return startingBalance
-  // }
+    return startingBalance
+  }
 
   const renderHeader = () => {
     const dateFormat = "MMMM yyyy"
