@@ -22,17 +22,17 @@ const ExpenseContainer = (props) => {
     
     for (let i = 0; i < financeArray.length; i++) {
       if (
-            (financeArray[i].fields.MONTH == selectedMonth 
-            && financeArray[i].fields.YEAR == selectedYear)
-            || financeArray[i].fields.RECURRING === "true" 
-          ) {
-            financeContainer.push(
-              <div key={financeArray[i].id}>
-                <span>{financeArray[i].fields.NAME}: {financeArray[i].fields.AMOUNT}</span>
-                <button onClick={() => handleDelete(financeArray[i].id)}>X</button>
-              </div>
-            )
-          }
+        (financeArray[i].fields.MONTH == selectedMonth 
+        && financeArray[i].fields.YEAR == selectedYear)
+        || financeArray[i].fields.RECURRING === "true" 
+      ) {
+        financeContainer.push(
+          <div key={financeArray[i].id}>
+            <span>{financeArray[i].fields.NAME}: {financeArray[i].fields.AMOUNT}</span>
+            <button onClick={() => handleDelete(financeArray[i].id)}>X</button>
+          </div>
+        )
+      }
     }
     return <div>{financeContainer}</div>
   }
@@ -88,7 +88,7 @@ const ExpenseContainer = (props) => {
         </Form.Item>
         <br />
         <Button type="primary" onClick={() => handleCreate()}>CREATE</Button>
-        <Button type="primary" onClick={() => console.log(finances)}>CHECK</Button>
+        {/*<Button type="primary" onClick={() => console.log(finances)}>CHECK</Button>*/}
       </Form>
     </div>
   )
