@@ -60,8 +60,8 @@ const ExpenseContainer = (props) => {
       YEAR: selectedYear
     }
 
-    createNewFinance(newFinance).then(data => { 
-      console.log('THEN')     
+    createNewFinance(newFinance).then(data => {
+      console.log(data)
       dispatch({ type: "ADD_FINANCES", finances: data[0] })
     })
   }

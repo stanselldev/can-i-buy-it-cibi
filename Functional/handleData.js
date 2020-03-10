@@ -5,12 +5,10 @@ var base = new Airtable({apiKey: AIRTABLE_API_KEY}).base('appfC00V649Vh4n5j');
 
 export const getAllFinances = async () => {
   let data = await base('DATA').select().all()
-  console.log(data)
   return data
 }
 
 export const createNewFinance = async (finance) => {
-  console.log(finance)
   let data = await base('DATA').create([
     {
       "fields": {
@@ -23,16 +21,8 @@ export const createNewFinance = async (finance) => {
         "YEAR": parseInt(finance.YEAR)
       }
     }
-  ], (err, records) => {
-    if (err) {
-      console.error(err)
-    } else {
-      records.forEach((record) => {
-        console.log(record)
-      })
-    }
-  })
-  console.log('RETURN')
+  ])
+  
   return data
 }
 

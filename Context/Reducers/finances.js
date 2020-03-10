@@ -4,11 +4,10 @@ const FinancesReducer = (state, action) => {
             return action.finances
 
         case 'ADD_FINANCES':
-          console.log("ADD RAN")
-            return [
-                ...state,
-                action.finances
-            ]
+          return [
+              ...state,
+              action.finances
+          ]
 
         default:
             return state 
