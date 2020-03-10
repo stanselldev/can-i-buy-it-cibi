@@ -60,11 +60,8 @@ const ExpenseContainer = (props) => {
       YEAR: selectedYear
     }
 
-    createNewFinance(newFinance).then(data => {
-      if (data === "error") {
-        return console.log("Something went wrong...")
-      }
-      
+    createNewFinance(newFinance).then(data => { 
+      console.log('THEN')     
       dispatch({ type: "ADD_FINANCES", finances: data[0] })
     })
   }

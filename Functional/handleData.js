@@ -10,20 +10,29 @@ export const getAllFinances = async () => {
 }
 
 export const createNewFinance = async (finance) => {
+  console.log(finance)
   let data = await base('DATA').create([
     {
       "fields": {
         "DAY": parseInt(finance.DAY),
         "NAME": finance.NAME.toString(),
-        "RECURRING": finance.RECURRING.toString(),
-        "AUTOPAY": "false",
+        "RECURRING": finance.RECURRING,
+        "AUTOPAY": finance.AUTOPAY,
         "AMOUNT": parseInt(finance.AMOUNT),
         "MONTH": parseInt(finance.MONTH),
         "YEAR": parseInt(finance.YEAR)
       }
     }
-  ])
-
+  ], (err, records) => {
+    if (err) {
+      console.error(err)
+    } else {
+      records.forEach((record) => {
+        console.log(record)
+      })
+    }
+  })
+  console.log('RETURN')
   return data
 }
 
