@@ -32,8 +32,8 @@ export const deleteFinance = async (id) => {
 }
 
 export const getSettings = async () => {
-  let data = await base('SETTINGS').select().all()
-  return data
+  // let data = await base('SETTINGS').select().all()
+  // return data
 }
 
 // export const updateSettings = async (settings) => {
